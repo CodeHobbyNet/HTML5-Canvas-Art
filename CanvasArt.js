@@ -100,14 +100,21 @@ function drawRectangles( canvasContext, rectangles )
 {
 	for( var i = 0; i < rectangles.length; i++ )
 	{
-		if( rectangles[i].type === rectangleTypeName )
-		{
-			canvasContext.fillStyle = rectangles[i].color;
-			//fillRect parameters: 
-			//1 and 2: x and y coordinate of the upper left corner of the rectangle
-			//3: width in pixels, 4: height in pixels
-			canvasContext.fillRect( rectangles[i].x,rectangles[i].y,rectangles[i].width,rectangles[i].height );
-		}
+		drawRectangle( canvasContext, rectangles[i] );
+	}
+}
+
+//Draws a rectangle with the format:
+//{type:rectangleTypeName, x:x, y:y, width:width, height:height, color:fillColor}
+function drawRectangle( canvasContext, rectangle )
+{
+	if( rectangle.type === rectangleTypeName )
+	{
+		canvasContext.fillStyle = rectangle.color;
+		//fillRect parameters: 
+		//1 and 2: x and y coordinate of the upper left corner of the rectangle
+		//3: width in pixels, 4: height in pixels
+		canvasContext.fillRect( rectangle.x,rectangle.y,rectangle.width,rectangle.height );
 	}
 }
 
@@ -117,15 +124,22 @@ function drawLines( canvasContext, lines )
 {
 	for( var i = 0; i < lines.length; i++ )
 	{
-		if( lines[i].type === lineTypeName )
-		{
-			//moveTo parameters: x and y coordinates to move the cursor to
-			//used as the starting point of the line created by stroke()
-			canvasContext.moveTo( lines[i].startX, lines[i].startY );
-			//lineTo parameters: x and y coordinates of the end of the line
-			canvasContext.lineTo( lines[i].endX, lines[i].endY );
-			canvasContext.stroke();
-		}
+		drawLine( canvasContext, lines[i] );
+	}
+}
+
+//Draws a line with the format:
+//{type:lineTypeName, startX:200, startY:100, endX:300, endY:200}
+function drawLine( canvasContext, line )
+{
+	if( line.type === lineTypeName )
+	{
+		//moveTo parameters: x and y coordinates to move the cursor to
+		//used as the starting point of the line created by stroke()
+		canvasContext.moveTo( line.startX, line.startY );
+		//lineTo parameters: x and y coordinates of the end of the line
+		canvasContext.lineTo( line.endX, line.endY );
+		canvasContext.stroke();
 	}
 }
 
