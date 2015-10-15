@@ -119,7 +119,8 @@ function drawRectangle( canvasContext, rectangle )
 }
 
 //Draws an array of lines with the format:
-//{type:lineTypeName, startX:200, startY:100, endX:300, endY:200}
+//{type:type name, startX:starting x coordinate, startY:starting y coordinate, endX:ending x coordinate, endY:ending y coordinate}
+//example: {type:lineTypeName, startX:200, startY:100, endX:300, endY:200}
 function drawLines( canvasContext, lines )
 {
 	for( var i = 0; i < lines.length; i++ )
