@@ -158,12 +158,15 @@ function drawHorizontalLines( canvasContext, verticalPositions )
 	drawLines( canvasContext, lines );
 }
 
+//Initializes the canvas
 function initCanvas()
 {
 	var canvasElementID = "Canvas";
 	var canvas = document.getElementById( canvasElementID );
-	canvas.width = 1200;
-	canvas.height = 800;
+	var canvasWidth = 1200;
+	var canvasHeight = 800;
+	canvas.width = canvasWidth;
+	canvas.height = canvasHeight;
 	var canvasContext = canvas.getContext("2d");
 	
 	drawOnCanvas( canvasContext );
