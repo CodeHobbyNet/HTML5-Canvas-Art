@@ -130,6 +130,7 @@ function drawLines( canvasContext, lines )
 }
 
 //Draws a line with the format:
+//{type:type name, startX:starting x coordinate, startY:starting y coordinate, endX:ending x coordinate, endY:ending y coordinate}
 //{type:lineTypeName, startX:200, startY:100, endX:300, endY:200}
 function drawLine( canvasContext, line )
 {
