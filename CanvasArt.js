@@ -163,8 +163,8 @@ function initCanvas()
 {
 	var canvasElementID = "Canvas";
 	var canvas = document.getElementById( canvasElementID );
-	var canvasWidth = 1200;
-	var canvasHeight = 800;
+	var canvasWidth = 1200;//Eventually I'd like to set this dynamically.
+	var canvasHeight = 800;//This too
 	canvas.width = canvasWidth;
 	canvas.height = canvasHeight;
 	var canvasContext = canvas.getContext("2d");
