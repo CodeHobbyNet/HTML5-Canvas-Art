@@ -7,11 +7,40 @@
 	<script src="CanvasArt.js"></script>
 </head>
 <body>
+	<table>
+		<tr>
+			<td>
 	<canvas id="Canvas">
 		Your browser does not support the HTML5 canvas tag.
 	</canvas>
 	<br>
 	<br>
 	<span id="testText"></span>
+			</td>
+			<td>
+				 <button type="button" onclick="clearCanvas()">Clear</button>
+				 <br>
+				 <fieldset>
+					<legend>Cloud</legend>
+					<label for="cloudX">X:</label>
+					<input type="number" id="cloudX" min="0" step="1" value="170">
+					<label for="cloudY">Y:</label>
+					<input type="number" id="cloudY" min="0" step="1" value="80">
+					<br>
+					<button type="button" onclick="addCloud()">Add cloud</button>
+				 </fieldset>
+				 <fieldset>
+					<legend>Fill</legend>
+					<label for="backgroundColor">Background Color: </label>
+					<select id="backgroundColor">
+						<option value="lightblue">Light Blue</option>
+						<option value="blue">Blue</option>
+					</select>
+					<br>
+					<button type="button" onclick="setBackgroundColor()">Background Color</button>
+				 </fieldset>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

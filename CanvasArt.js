@@ -1,6 +1,9 @@
 var rectangleTypeName = "rectangle";
 var lineTypeName = "line";
 
+//Canvas Variables
+var canvasElementID = "Canvas";
+
 function drawOnCanvas( canvasContext )
 {
 	var fillColor = "#FF0000";
@@ -145,6 +148,13 @@ function drawLine( canvasContext, line )
 	}
 }
 
+//Draws a line, taking in the starting and ending x and y coordinates
+function drawLineXY( canvasContext, startingX, startingY, endingX, endingY )
+{
+	var line = {type:lineTypeName, startX:startingX, startY:startingY, endX:endingX, endY:endingY};
+	drawLine( canvasContext, line );
+}
+
 //Draws an array of horizontal lines that span the canvas at the y values specified in the array verticalPositions:
 //{type:lineTypeName, startX:200, startY:100, endX:300, endY:200}
 function drawHorizontalLines( canvasContext, verticalPositions )
@@ -161,7 +171,6 @@ function drawHorizontalLines( canvasContext, verticalPositions )
 //Initializes the canvas
 function initCanvas()
 {
-	var canvasElementID = "Canvas";
 	var canvas = document.getElementById( canvasElementID );
 	var canvasWidth = 1200;//Eventually I'd like to set these dynamically.
 	var canvasHeight = 800;
@@ -170,6 +179,88 @@ function initCanvas()
 	var canvasContext = canvas.getContext("2d");
 	
 	drawOnCanvas( canvasContext );
+	clearCanvas();
+	addCloud();
+	//addGrid();
+	//alert( "Done initing." );
+}
+
+function clearCanvas()
+{
+	//Get the canvas and context
+	var canvas = document.getElementById( canvasElementID );
+	var canvasContext = canvas.getContext("2d");
+
+	//Clear the whole context/canvas
+	canvasContext.clearRect( 0, 0, canvas.width, canvas.height );
+
+	//alert( "Canvas should have been cleared." );
+}
+
+function addCloud()
+{
+	//Get the canvas and context
+	var canvas = document.getElementById( canvasElementID );
+	var canvasContext = canvas.getContext("2d");
+
+	//Get the starting point
+	var startX = document.getElementById('cloudX').value;
+	var startY = document.getElementById('cloudY').value;
+	//alert( "Cloud at " + startX + " , " + startY );
+
+	//Draw the cloud
+	canvasContext.beginPath();
+	canvasContext.moveTo(170, 80);
+	canvasContext.bezierCurveTo(160, 100, 160, 150, 230, 150);
+	canvasContext.bezierCurveTo(250, 160, 320, 160, 340, 150);
+	canvasContext.bezierCurveTo(395, 150, 395, 120, 390, 100);
+	canvasContext.bezierCurveTo(400, 40, 340, 40, 340, 50);
+	canvasContext.bezierCurveTo(320, 5, 250, 20, 250, 50);
+	canvasContext.bezierCurveTo(260, 50, 160, 20, 170, 80);
+	canvasContext.closePath();
+	canvasContext.lineWidth = 5;
+	canvasContext.strokeStyle = 'black';
+	canvasContext.fillStyle = '#FFFFFF';
+	canvasContext.fill();
+	canvasContext.stroke();
+	//alert( "Cloud added." );
+}
+
+function addGrid()
+{
+	//Get the canvas and context
+	var canvas = document.getElementById( canvasElementID );
+	var canvasContext = canvas.getContext("2d");
+
+	//Add the vertical line labels
+	canvasContext.font = "10px Arial";
+	canvasContext.fillStyle = "black";
+	canvasContext.lineWidth = 1;
+	canvasContext.strokeStyle = 'black';
+	for( var x = 10; x < (canvas.width - 10); x = x + 10 )
+	{
+		drawLineXY( canvasContext, x, 0, x, canvas.height - 25 );
+
+		if( x % 30 === 0 )
+		{
+			canvasContext.fillText(x, x-5, canvas.height - 15 );
+		}
+	}
+}
+
+function setBackgroundColor()
+{
+	//Get the canvas and context
+	var canvas = document.getElementById( canvasElementID );
+	var canvasContext = canvas.getContext("2d");
+
+	//Get the fill color
+	var backgroundColor = document.getElementById('backgroundColor').value;
+
+	//Set the background color.
+	canvas.style.background = backgroundColor;
+
+	//alert( "Canvas should have been cleared." );
 }
 
 window.onload = initCanvas;

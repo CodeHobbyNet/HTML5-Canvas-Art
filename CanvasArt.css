@@ -2,3 +2,8 @@ canvas
 {
 	border: 1px solid #c3c3c3;
 }
+
+fieldset
+{
+	margin: 1em;
+}
