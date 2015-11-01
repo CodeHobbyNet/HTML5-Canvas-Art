@@ -79,6 +79,7 @@ function drawOnCanvas( canvasContext )
 	var startAngle = 0;
 	var endAngle = 2*Math.PI;
 	canvasContext.arc(x,y,radius,startAngle,endAngle);
+	canvasContext.closePath();
 	canvasContext.stroke();
 
 	//Circle
@@ -94,6 +95,7 @@ function drawOnCanvas( canvasContext )
 	canvasContext.fill();
 	canvasContext.lineWidth = lineWidth;
 	canvasContext.strokeStyle = lineColor;
+	canvasContext.closePath();
 	canvasContext.stroke();
 }
 
@@ -144,6 +146,10 @@ function drawLine( canvasContext, line )
 		canvasContext.moveTo( line.startX, line.startY );
 		//lineTo parameters: x and y coordinates of the end of the line
 		canvasContext.lineTo( line.endX, line.endY );
+		if( "color" in line )
+		{
+			canvasContext.strokeStyle = line.color;
+		}
 		canvasContext.stroke();
 	}
 }
@@ -153,6 +159,32 @@ function drawLineXY( canvasContext, startingX, startingY, endingX, endingY )
 {
 	var line = {type:lineTypeName, startX:startingX, startY:startingY, endX:endingX, endY:endingY};
 	drawLine( canvasContext, line );
+}
+
+//Draws a line, taking in the starting, ending x and y coordinates, and color from the screen
+function drawLineFromScreen()
+{
+	//Get the canvas and context
+	var canvas = document.getElementById( canvasElementID );
+	var canvasContext = canvas.getContext("2d");
+
+	//Get the coordinates from the screen
+	var startingX = document.getElementById('lineStartX').value;
+	var startingY = document.getElementById('lineStartY').value;
+	var endingX = document.getElementById('lineEndX').value;
+	var endingY = document.getElementById('lineEndY').value;
+	var lineColor = document.getElementById('lineColor').value;
+
+	//Draw the line
+	/*
+	var line = {type:lineTypeName, startX:startingX, startY:startingY, endX:endingX, endY:endingY, color:lineColor};
+	drawLine( canvasContext, line );
+	*/
+	//canvasContext.closePath();
+	canvasContext.moveTo( startingX, startingY );
+	canvasContext.lineTo( endingX, endingY );
+	canvasContext.strokeStyle = lineColor;
+	canvasContext.stroke();
 }
 
 //Draws an array of horizontal lines that span the canvas at the y values specified in the array verticalPositions:
@@ -192,24 +224,37 @@ function clearCanvas()
 	var canvasContext = canvas.getContext("2d");
 
 	//Clear the whole context/canvas
-	canvasContext.clearRect( 0, 0, canvas.width, canvas.height );
+	//canvasContext.clearRect( 0, 0, canvas.width, canvas.height );
+	//The above seems to mostly work, but there seems to be a bug that (with the above clearRect call) if I call drawLineFromScreen() after addCloud() it always redraws the cloud, even after calling this function.
+	//At least it does that on my current version of Firefox on Ubuntu as of November 1 2015, which seems to be Firefox 41.0.2
+	canvas.width = canvas.width;//This seems to work better, especially in that it doesn't have the above bug. Apparently it's a lot slower, but it's not noticable to me on this web page on my Ubuntu desktop.
 
 	//alert( "Canvas should have been cleared." );
 }
 
 function addCloud()
 {
+	console.log("In addCloud()");
 	//Get the canvas and context
 	var canvas = document.getElementById( canvasElementID );
 	var canvasContext = canvas.getContext("2d");
 
 	//Get the starting point
-	var startX = document.getElementById('cloudX').value;
-	var startY = document.getElementById('cloudY').value;
-	//alert( "Cloud at " + startX + " , " + startY );
+	var startX = Number( document.getElementById('cloudX').value );
+	var startY = Number( document.getElementById('cloudY').value );
 
 	//Draw the cloud
 	canvasContext.beginPath();
+	canvasContext.moveTo(startX, startY);
+	canvasContext.bezierCurveTo(startX-10, startY+20, startX-10, startY+70, startX+60, startY+70);
+	//console.log( "canvasContext.bezierCurveTo(" + (startX-10) + ", " + (startY+20) + ", " + (startX-10) + ", " + (startY+70) + ", " + (startX+60) + ", " + (startY+70) + ");" );
+	canvasContext.bezierCurveTo(startX+80, startY+80, startX+150, startY+80, startX+170, startY+70);
+	//console.log( "canvasContext.bezierCurveTo(" + (startX+80) + ", " + (startY+80) + ", " + (startX+150) + ", " + (startY+80) + ", " + (startX+170) + ", " + (startY+70) + ");" );
+	canvasContext.bezierCurveTo(startX+225, startY+70, startX+225, startY+40, startX+220, startY+20);
+	canvasContext.bezierCurveTo(startX+230, startY-40, startX+170, startY-40, startX+170, startY-30);
+	canvasContext.bezierCurveTo(startX+150, startY-75, startX+80, startY-60, startX+80, startY-30);
+	canvasContext.bezierCurveTo(startX+90, startY-30, startX-10, startY-60, startX, startY);
+	/*
 	canvasContext.moveTo(170, 80);
 	canvasContext.bezierCurveTo(160, 100, 160, 150, 230, 150);
 	canvasContext.bezierCurveTo(250, 160, 320, 160, 340, 150);
@@ -217,11 +262,13 @@ function addCloud()
 	canvasContext.bezierCurveTo(400, 40, 340, 40, 340, 50);
 	canvasContext.bezierCurveTo(320, 5, 250, 20, 250, 50);
 	canvasContext.bezierCurveTo(260, 50, 160, 20, 170, 80);
-	canvasContext.closePath();
+	*/
+	//canvasContext.closePath();
 	canvasContext.lineWidth = 5;
 	canvasContext.strokeStyle = 'black';
 	canvasContext.fillStyle = '#FFFFFF';
 	canvasContext.fill();
+	canvasContext.closePath();
 	canvasContext.stroke();
 	//alert( "Cloud added." );
 }

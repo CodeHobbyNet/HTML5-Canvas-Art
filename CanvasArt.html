@@ -10,12 +10,12 @@
 	<table>
 		<tr>
 			<td>
-	<canvas id="Canvas">
-		Your browser does not support the HTML5 canvas tag.
-	</canvas>
-	<br>
-	<br>
-	<span id="testText"></span>
+				<canvas id="Canvas">
+					Your browser does not support the HTML5 canvas tag.
+				</canvas>
+				<br>
+				<br>
+				<span id="testText"></span>
 			</td>
 			<td>
 				 <button type="button" onclick="clearCanvas()">Clear</button>
@@ -38,6 +38,31 @@
 					</select>
 					<br>
 					<button type="button" onclick="setBackgroundColor()">Background Color</button>
+				 </fieldset>
+				 <fieldset>
+					<legend>Line</legend>
+					Starting Point:
+					<br>
+					<label for="lineStartX">X:</label>
+					<input type="number" id="lineStartX" min="0" step="1" value="170">
+					<label for="lineStartY">Y:</label>
+					<input type="number" id="lineStartY" min="0" step="1" value="80">
+					<br>
+					Ending Point:
+					<br>
+					<label for="lineEndX">X:</label>
+					<input type="number" id="lineEndX" min="0" step="1" value="170">
+					<label for="lineEndY">Y:</label>
+					<input type="number" id="lineEndY" min="0" step="1" value="80">
+					<br>
+					<label for="lineColor">Color: </label>
+					<select id="lineColor">>
+						<option value="black">Black</option>
+						<option value="lightblue">Light Blue</option>
+						<option value="blue">Blue</option>
+					</select>
+					<br>
+					<button type="button" onclick="drawLineFromScreen()">Draw Line</button>
 				 </fieldset>
 			</td>
 		</tr>
