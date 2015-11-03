@@ -64,6 +64,50 @@
 					<br>
 					<button type="button" onclick="drawLineFromScreen()">Draw Line</button>
 				 </fieldset>
+				 <fieldset>
+					<legend>Rectangle</legend>
+					Top Left Point:
+					<br>
+					<label for="rectangleStartX">X:</label>
+					<input type="number" id="rectangleStartX" min="0" step="1" value="170">
+					<label for="rectangleStartY">Y:</label>
+					<input type="number" id="rectangleStartY" min="0" step="1" value="80">
+					<br>
+					<label for="rectangleWidth">Width:</label>
+					<input type="number" id="rectangleWidth" min="0" step="1" value="50">
+					<label for="rectangleHeight">Height:</label>
+					<input type="number" id="rectangleHeight" min="0" step="1" value="50">
+					<br>
+					<label for="rectangleColor">Color:</label>
+					<select id="rectangleColor">>
+						<option value="black">Black</option>
+						<option value="lightblue">Light Blue</option>
+						<option value="blue">Blue</option>
+					</select>
+					<br>
+					<button type="button" onclick="">Draw Rectangle</button>
+				 </fieldset>
+				 <fieldset>
+					<legend>Circle</legend>
+					Center Point:
+					<br>
+					<label for="circleCenterX">X:</label>
+					<input type="number" id="circleCenterX" min="0" step="1" value="170">
+					<label for="circleCenterY">Y:</label>
+					<input type="number" id="circleCenterY" min="0" step="1" value="80">
+					<br>
+					<label for="circleRadius">Radius:</label>
+					<input type="number" id="circleRadius" min="0" step="1" value="50">
+					<br>
+					<label for="circleColor">Color:</label>
+					<select id="circleColor">>
+						<option value="black">Black</option>
+						<option value="lightblue">Light Blue</option>
+						<option value="blue">Blue</option>
+					</select>
+					<br>
+					<button type="button" onclick="">Draw Circle</button>
+				 </fieldset>
 			</td>
 		</tr>
 	</table>
