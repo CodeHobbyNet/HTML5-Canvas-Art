@@ -3,6 +3,7 @@ var lineTypeName = "line";
 
 //Canvas Variables
 var canvasElementID = "Canvas";
+var downloadElementID = "downloadCanvas";
 
 function drawOnCanvas( canvasContext )
 {
@@ -215,6 +216,17 @@ function initCanvas()
 	addCloud();
 	//addGrid();
 	//alert( "Done initing." );
+	
+	//Add the mouse click event for the canvas
+	canvas.addEventListener('click', function(evt) {
+		var mouseClickPosition = getMousePositionWithinCanvas(canvas, evt);
+		console.log(canvas, "You clicked on coordinate " + mouseClickPosition.x + ", " + mouseClickPosition.y );
+	}, false);
+	
+	//Add the mouse click event for the canvas
+	document.getElementById(downloadElementID).addEventListener('click', function(evt) {
+		this.href = canvas.toDataURL('image/png');
+	}, false);
 }
 
 function clearCanvas()
@@ -308,6 +320,15 @@ function setBackgroundColor()
 	canvas.style.background = backgroundColor;
 
 	//alert( "Canvas should have been cleared." );
+}
+
+function getMousePositionWithinCanvas( canvas, event )
+{
+	var canvasRect = canvas.getBoundingClientRect();
+	return {
+		x: event.clientX - canvasRect.left,
+		y: event.clientY - canvasRect.top
+	};
 }
 
 window.onload = initCanvas;
