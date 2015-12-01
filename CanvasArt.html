@@ -19,7 +19,7 @@
 			</td>
 			<td>
 				 <button type="button" onclick="clearCanvas()">Clear</button>
-				 <a id="downloadCanvas" download="drawing.png">Download as image</a>
+				 <a id="downloadCanvas" download="drawing.png" href="">Download as image</a>
 				 <br>
 				 <fieldset>
 					<legend>Cloud</legend>
@@ -36,6 +36,7 @@
 					<select id="backgroundColor">
 						<option value="lightblue">Light Blue</option>
 						<option value="blue">Blue</option>
+						<option value="transparent">Clear</option>
 					</select>
 					<br>
 					<button type="button" onclick="setBackgroundColor()">Background Color</button>
@@ -115,7 +116,7 @@
 				 </fieldset>
 				 <fieldset>
 					<legend>Series of Lines</legend>
-					Click on the canvast to draw once you click the button.
+					Click on the canvas to draw once you click the button.
 					<br>
 					<button type="button" onclick="">Start series</button>
 				 </fieldset>

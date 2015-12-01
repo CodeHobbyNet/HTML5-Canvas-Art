@@ -225,7 +225,22 @@ function initCanvas()
 	
 	//Add the mouse click event for the canvas
 	document.getElementById(downloadElementID).addEventListener('click', function(evt) {
-		this.href = canvas.toDataURL('image/png');
+		/*
+		//Get the canvas and context
+		var canvas = document.getElementById( canvasElementID );
+		var canvasContext = canvas.getContext("2d");
+*/
+
+		//Get another context for the download and fill in the bacground color for the download
+		var downloadContext = canvas.getContext("2d");
+		//var downloadContext = canvasContext;
+		downloadContext.fillStyle = document.getElementById('backgroundColor').value;
+		downloadContext.fillRect(0,0,canvas.width,canvas.height);
+
+		//Put in the drawn image
+		downloadContext.drawImage(canvas, 0, 0);
+
+		this.href = downloadContext.toDataURL('image/png');
 	}, false);
 }
 
