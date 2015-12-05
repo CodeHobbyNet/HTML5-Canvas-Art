@@ -12,3 +12,10 @@ td
 {
 	vertical-align: top;
 }
+
+fieldset a
+{
+	background-color: lightgrey;
+	padding: 0.5em;
+	border-radius: 5px;
+}
